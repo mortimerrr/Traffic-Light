@@ -48,32 +48,45 @@ end
 
   class GoBulb < Bulb
     def bulb_colour
-      TL::Go
+      if self.switched_on
+        TL::Go
+      else
+        "#999999"
+      end
     end 
   end
 
   class WaitBulb < Bulb
     def bulb_colour
-      TL::Wait
+      if self.switched_on
+        TL::Wait
+      else
+        "#999999"
+      end
     end 
   end
 
   class StopBulb < Bulb
     def bulb_colour
-      TL::Stop
+      if self.switched_on
+        TL::Stop
+      else
+        "#999999"
+      end
     end 
   end
+
 
 Shoes.app :title => "My Amazing Traffic Light", :width => 150, :height => 250 do
   background "000", :curve => 10, :margin => 25  
   stroke black    
   
   @traffic_light = TrafficLight.new
-  @top = StopBulb.new self, 50, 40, true     
-  @middle = WaitBulb.new self, 50, 100, true
-  @bottom = GoBulb.new self, 50, 160, true
+    @top = StopBulb.new self, 50, 40, true   
+    @middle = WaitBulb.new self, 50, 100, false
+    @bottom = GoBulb.new self, 50, 160, false
   
   click do
-    
+
   end
 end
