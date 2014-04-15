@@ -1,3 +1,9 @@
+module TL
+  Go = "#00FF30"
+  Wait = "#FFFC00"
+  Stop = "#FF0000"
+end
+
 class TrafficLight  
   include Enumerable
 
@@ -38,14 +44,34 @@ class Bulb < Shoes::Shape
   end  
 end
 
+
+
+  class GoBulb < Bulb
+    def bulb_colour
+      TL::Go
+    end 
+  end
+
+  class WaitBulb < Bulb
+    def bulb_colour
+      TL::Wait
+    end 
+  end
+
+  class StopBulb < Bulb
+    def bulb_colour
+      TL::Stop
+    end 
+  end
+
 Shoes.app :title => "My Amazing Traffic Light", :width => 150, :height => 250 do
   background "000", :curve => 10, :margin => 25  
   stroke black    
   
   @traffic_light = TrafficLight.new
-  @top = Bulb.new self, 50, 40, true     
-  @middle = Bulb.new self, 50, 100, true
-  @bottom = Bulb.new self, 50, 160, true
+  @top = StopBulb.new self, 50, 40, true     
+  @middle = WaitBulb.new self, 50, 100, true
+  @bottom = GoBulb.new self, 50, 160, true
   
   click do
     
