@@ -87,6 +87,16 @@ Shoes.app :title => "My Amazing Traffic Light", :width => 150, :height => 250 do
     @bottom = GoBulb.new self, 50, 160, false
   
   click do
+    Thread.new do
+      @traffic_light.each_entry { |p| 
+         sleep 1
+          @top = StopBulb.new self, 50, 40, p[0]   
+          @middle = WaitBulb.new self, 50, 100, p[1]
+          @bottom = GoBulb.new self, 50, 160, p[2]
+
+      }
+    end
 
   end
+
 end
